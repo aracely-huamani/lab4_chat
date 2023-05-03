@@ -13,8 +13,11 @@ io.on('connection', (socket) =>{
     })
 })
 
+app.use(express.static(`${__dirname}/public`));
+
+
 app.get('/',(req,resp)=>{
-    resp.sendFile(`${__dirname}/chat_view.html/`)
+    resp.sendFile(`${__dirname}/chat_view.html`)
 })
 
 server.listen(3000,()=>{
