@@ -576,93 +576,21 @@
 
 </div>
     <div class="small-chat-box fadeInRight animated">
-
         <div class="heading" draggable="true">
-            <small class="chat-date pull-right">
+            Small chat<small class="chat-date pull-right">
                 02.19.2015
             </small>
-            Small chat
         </div>
-
         <div class="content">
-
-            <div class="left">
-                <div class="author-name">
-                    Monica Jackson <small class="chat-date">
-                    10:02 am
-                </small>
-                </div>
-                <div class="chat-message active">
-                    Lorem Ipsum is simply dummy text input.
-                </div>
-
-            </div>
-            <div class="right">
-                <div class="author-name">
-                    Mick Smith
-                    <small class="chat-date">
-                        11:24 am
-                    </small>
-                </div>
-                <div class="chat-message">
-                    Lorem Ipsum is simpl.
-                </div>
-            </div>
-            <div class="left">
-                <div class="author-name">
-                    Alice Novak
-                    <small class="chat-date">
-                        08:45 pm
-                    </small>
-                </div>
-                <div class="chat-message active">
-                    Check this stock char.
-                </div>
-            </div>
-            <div class="right">
-                <div class="author-name">
-                    Anna Lamson
-                    <small class="chat-date">
-                        11:24 am
-                    </small>
-                </div>
-                <div class="chat-message">
-                    The standard chunk of Lorem Ipsum
-                </div>
-            </div>
-            <div class="left">
-                <div class="author-name">
-                    Mick Lane
-                    <small class="chat-date">
-                        08:45 pm
-                    </small>
-                </div>
-                <div class="chat-message active">
-                    I belive that. Lorem Ipsum is simply dummy text.
-                </div>
-            </div>
-            <div name= "right" class="right">
-                    <div class="author-name">
-                        Aracely
-                        <small class="chat-date">
-                            08:45 pm
-                        </small>
-                    </div>
-                    <div id= "mensaje"class="chat-message active">
-                        
-                    </div>
+            <div  class="left">         
+                   <p class ="form-control"id="mensaje" class="author-name"></p>
             </div>
         </div>
-        <div class="form-chat">
-            <div class="input-group input-group-sm">
-                <form id= "form" action="">
-                <input id="input" type="text" class="form-control">
-                  <span class="input-group-btn"> 
-                    <button class="btn btn-primary" type="button">Send </button> 
-                  </span>
-                </form>
-            </div>
-        </div>
+           
+            <form id="form" action="">
+                <input id= "input" type="text" class="form-control" placeholder="Ingrese Mensaje">
+                <button class="btn btn-primary">Enviar</button>
+            </form>
 
     </div>
     <div id="small-chat">
@@ -689,28 +617,28 @@
 
 <script src="/socket.io/socket.io.js"></script>
 
-    <script>
-        let socket = io()
-        // referenciamos a los elementos de DOM
-        const form = document.querySelector('#form')
-        const input = document.querySelector('#input')
-        let mensajes = document.querySelector('#mensaje')
+<script>
+    let socket = io()
+    // referenciamos a los elementos de DOM
+    const form = document.querySelector('#form')
+    const input = document.querySelector('#input')
+    let mensajes = document.querySelector('#mensaje')
 
-        form.addEventListener('submit', (e) => {
-            e.preventDefault()
-            if(input.value){
-                socket.emit('chat', input.value)
-                input.value = ''
-            }
-        })
+    form.addEventListener('submit', (e) => {
+        e.preventDefault()
+        if(input.value){
+            socket.emit('chat', input.value)
+            input.value = ''
+        }
+    })
 
-        socket.on('chat', (msg) => {
-            let item = document.createElement('li')
-            item.textContent = msg
-            mensajes.appendChild(item)
-            
-        })
-    </script>
+    socket.on('chat', (msg) => {
+        let item = document.createElement('p')
+        item.textContent = msg
+        mensajes.appendChild(item)
+        window.scrollTo(0, document.body.scrollHeight)
+    })
+</script>
 
 
 
